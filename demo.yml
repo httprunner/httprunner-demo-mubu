@@ -152,386 +152,388 @@ teststeps:
                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
         method: GET
         url: https://mubu.com/doc${documentId}
+    extract:
+        memberId: "memberId: '(.*)'"
     validate:
     -   eq:
         - status_code
         - 200
-# -   name: /api/document/get
-#     request:
-#         data:
-#             docId: ${documentId}
-#         headers:
-#             content-type: application/x-www-form-urlencoded; charset=UTF-8
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         method: POST
-#         url: https://mubu.com/api/document/get
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - Success
-# -   name: /api/user/current_level
-#     request:
-#         data: ''
-#         headers:
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         method: POST
-#         params:
-#             document_id: ${documentId}
-#         url: https://mubu.com/api/user/current_level
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - Success
-# -   name: /api/ticket/register
-#     request:
-#         headers:
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         method: GET
-#         url: https://mubu.com/api/ticket/register
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - Success
-# -   name: /api/middleware/members
-#     request:
-#         headers:
-#             request-id: members:1245655:1563605086828
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         method: GET
-#         params:
-#             documentId: ${documentId}
-#             memberId: '1245655'
-#         url: https://mubu.com/api/middleware/members
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
+-   name: /api/document/get
+    request:
+        data:
+            docId: ${documentId}
+        headers:
+            content-type: application/x-www-form-urlencoded; charset=UTF-8
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        method: POST
+        url: https://mubu.com/api/document/get
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - Success
+-   name: /api/user/current_level
+    request:
+        data: ''
+        headers:
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        method: POST
+        params:
+            document_id: ${documentId}
+        url: https://mubu.com/api/user/current_level
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - Success
+-   name: /api/ticket/register
+    request:
+        headers:
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        method: GET
+        url: https://mubu.com/api/ticket/register
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - Success
+-   name: /api/middleware/members
+    request:
+        headers:
+            request-id: members:${memberId}:1563605086828
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        method: GET
+        params:
+            documentId: ${documentId}
+            memberId: '${memberId}'
+        url: https://mubu.com/api/middleware/members
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:2
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   created:
+                        -   index: 0
+                            node:
+                                id: bf16c0e20418b05e
+                                modified: 1563605090699
+                                text: ''
+                            parentId: null
+                        name: create
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 0
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 2
+            requestId: MESSAGE:1449164:${memberId}:2
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:5
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: d
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 1
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 5
+            requestId: MESSAGE:1449164:${memberId}:5
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:7
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: de
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 2
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 7
+            requestId: MESSAGE:1449164:${memberId}:7
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:9
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: dem
+                    -   name: nameChanged
+                        title: demo
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 3
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 9
+            requestId: MESSAGE:1449164:${memberId}:9
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:10
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: demo1
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 4
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 10
+            requestId: MESSAGE:1449164:${memberId}:10
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:12
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: demo12
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 5
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 12
+            requestId: MESSAGE:1449164:${memberId}:12
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
+-   name: /api/middleware/message
+    request:
+        headers:
+            content-type: application/json; charset=UTF-8
+            member-id: '${memberId}'
+            request-id: MESSAGE:1449164:${memberId}:13
+            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
+            x-requested-with: XMLHttpRequest
+        json:
+            context:
+                appVersion: '0'
+                os: macOS
+                osVersion: 10.14.1
+                platform: web
+            data:
+                message:
+                    content:
+                    -   name: nameChanged
+                        title: demo789
+                    documentId: ${documentId}
+                    type: CHANGE
+                    version: 6
+            engineType: MUBU
+            messageType: BROADCAST
+            reqId: 13
+            requestId: MESSAGE:1449164:${memberId}:13
+            token: ${documentId}
+        method: POST
+        url: https://mubu.com/api/middleware/message
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - content.code
+        - 0
+    -   eq:
+        - content.msg
+        - success
 # -   name: /api/middleware/message
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:2
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   created:
-#                         -   index: 0
-#                             node:
-#                                 id: bf16c0e20418b05e
-#                                 modified: 1563605090699
-#                                 text: ''
-#                             parentId: null
-#                         name: create
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 0
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 2
-#             requestId: MESSAGE:1449164:1245655:2
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:5
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: d
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 1
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 5
-#             requestId: MESSAGE:1449164:1245655:5
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:7
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: de
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 2
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 7
-#             requestId: MESSAGE:1449164:1245655:7
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:9
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: dem
-#                     -   name: nameChanged
-#                         title: demo
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 3
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 9
-#             requestId: MESSAGE:1449164:1245655:9
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:10
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: demo1
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 4
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 10
-#             requestId: MESSAGE:1449164:1245655:10
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:12
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: demo12
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 5
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 12
-#             requestId: MESSAGE:1449164:1245655:12
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:13
-#             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-#                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-#             x-requested-with: XMLHttpRequest
-#         json:
-#             context:
-#                 appVersion: '0'
-#                 os: macOS
-#                 osVersion: 10.14.1
-#                 platform: web
-#             data:
-#                 message:
-#                     content:
-#                     -   name: nameChanged
-#                         title: demo123
-#                     documentId: ${documentId}
-#                     type: CHANGE
-#                     version: 6
-#             engineType: MUBU
-#             messageType: BROADCAST
-#             reqId: 13
-#             requestId: MESSAGE:1449164:1245655:13
-#             token: ${documentId}
-#         method: POST
-#         url: https://mubu.com/api/middleware/message
-#     validate:
-#     -   eq:
-#         - status_code
-#         - 200
-#     -   eq:
-#         - content.code
-#         - 0
-#     -   eq:
-#         - content.msg
-#         - success
-# -   name: /api/middleware/message
-#     request:
-#         headers:
-#             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:16
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:16
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -555,7 +557,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 16
-#             requestId: MESSAGE:1449164:1245655:16
+#             requestId: MESSAGE:1449164:${memberId}:16
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -573,8 +575,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:18
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:18
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -598,7 +600,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 18
-#             requestId: MESSAGE:1449164:1245655:18
+#             requestId: MESSAGE:1449164:${memberId}:18
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -616,8 +618,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:19
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:19
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -641,7 +643,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 19
-#             requestId: MESSAGE:1449164:1245655:19
+#             requestId: MESSAGE:1449164:${memberId}:19
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -659,8 +661,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:22
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:22
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -692,7 +694,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 22
-#             requestId: MESSAGE:1449164:1245655:22
+#             requestId: MESSAGE:1449164:${memberId}:22
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -710,8 +712,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:24
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:24
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -735,7 +737,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 24
-#             requestId: MESSAGE:1449164:1245655:24
+#             requestId: MESSAGE:1449164:${memberId}:24
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -753,8 +755,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:26
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:26
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -778,7 +780,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 26
-#             requestId: MESSAGE:1449164:1245655:26
+#             requestId: MESSAGE:1449164:${memberId}:26
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
@@ -796,8 +798,8 @@ teststeps:
 #     request:
 #         headers:
 #             content-type: application/json; charset=UTF-8
-#             member-id: '1245655'
-#             request-id: MESSAGE:1449164:1245655:28
+#             member-id: '${memberId}'
+#             request-id: MESSAGE:1449164:${memberId}:28
 #             user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
 #                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
 #             x-requested-with: XMLHttpRequest
@@ -821,7 +823,7 @@ teststeps:
 #             engineType: MUBU
 #             messageType: BROADCAST
 #             reqId: 28
-#             requestId: MESSAGE:1449164:1245655:28
+#             requestId: MESSAGE:1449164:${memberId}:28
 #             token: ${documentId}
 #         method: POST
 #         url: https://mubu.com/api/middleware/message
