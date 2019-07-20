@@ -30,22 +30,11 @@ teststeps:
         - status_code
         - 200
 -   name: /api/login/submit
-    request:
-        data:
-            password: ${password}
-            phone: ${phone}
-            remember: 'true'
-        headers:
-            content-type: application/x-www-form-urlencoded; charset=UTF-8
-            user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36
-                (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
-            x-requested-with: XMLHttpRequest
-        method: POST
-        url: /api/login/submit
+    variables:
+        phone: $phone
+        password: $password
+    api: api/login_submit.yml
     validate:
-    -   eq:
-        - status_code
-        - 200
     -   eq:
         - content.code
         - 0
