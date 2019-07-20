@@ -1,0 +1,9 @@
+config:
+    name: "login with different accounts"
+
+testcases:
+-
+    name: login system
+    testcase: testcases/login.yml
+    parameters:
+        phone-password: ${P(data/accounts.csv)}
