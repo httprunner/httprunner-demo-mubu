@@ -42,6 +42,8 @@ teststeps:
                 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36
         method: GET
         url: https://mubu.com/doc${documentId}
+    setup_hooks:
+        - ${print_documentId($documentId)}
     extract:
         memberId: "memberId: '(.*)'"
     validate:

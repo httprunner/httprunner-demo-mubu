@@ -1,7 +1,7 @@
 config:
     name: change doc title
     variables:
-        new_title: "new_title_123"
+        new_title: "new_title_${get_timestamp()}"
     verify: False
 teststeps:
 -   name: create new doc
