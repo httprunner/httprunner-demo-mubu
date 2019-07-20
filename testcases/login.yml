@@ -1,6 +1,8 @@
 config:
     name: login system
-    variables: {}
+    variables:
+        password: ${ENV(PASSWORD)}
+        phone: ${ENV(USERNAME)}
     verify: False
     base_url: ${get_base_url()}
 
@@ -30,8 +32,8 @@ teststeps:
 -   name: /api/login/submit
     request:
         data:
-            password: kXHakSSa5aO7HO^DDYd&
-            phone: '18613143458'
+            password: ${password}
+            phone: ${phone}
             remember: 'true'
         headers:
             content-type: application/x-www-form-urlencoded; charset=UTF-8
