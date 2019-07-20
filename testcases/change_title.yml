@@ -1,6 +1,7 @@
 config:
     name: change doc title
-    variables: {}
+    variables:
+        new_title: "new_title_123"
     verify: False
 teststeps:
 -   name: create new doc
@@ -277,7 +278,7 @@ teststeps:
                 message:
                     content:
                     -   name: nameChanged
-                        title: demo789
+                        title: ${new_title}
                     documentId: ${documentId}
                     type: CHANGE
                     version: 6
