@@ -60,15 +60,10 @@ teststeps:
         method: POST
         url: https://mubu.com/api/document/get
     validate:
-    -   eq:
-        - status_code
-        - 200
-    -   eq:
-        - content.code
-        - 0
-    -   eq:
-        - content.msg
-        - Success
+        - eq: [status_code, 200]
+        - eq: [content.code, 0]
+        - eq: [content.msg, Success]
+        - eq: [content.data.name, "无标题"]
 -   name: /api/user/current_level
     request:
         data: ''
@@ -101,15 +96,10 @@ teststeps:
         method: GET
         url: https://mubu.com/api/ticket/register
     validate:
-    -   eq:
-        - status_code
-        - 200
-    -   eq:
-        - content.code
-        - 0
-    -   eq:
-        - content.msg
-        - Success
+        - eq: [status_code, 200]
+        - eq: [content.code, 0]
+        - eq: [content.msg, Success]
+        - len_eq: [content.data.ticket, 32]
 -   name: /api/middleware/members
     request:
         headers:
